@@ -15,4 +15,4 @@ Xms=${Java_Xms:-256m}
 Xmx=${Java_Xmx:-512m}
 
 set -x
-java -Xms$Xms -Xmx$Xmx -cp languagetool-server.jar org.languagetool.server.HTTPServer --port 8010 --public --allow-origin '*' --config config.properties
+exec java -Xms$Xms -Xmx$Xmx -cp languagetool-server.jar org.languagetool.server.HTTPServer --port 8010 --public --allow-origin '*' --config config.properties
