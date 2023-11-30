@@ -93,7 +93,7 @@ WORKDIR /languagetool
 
 # Note: When changing the base image, verify that the hunspell.sh workaround is
 # downloading the matching version of `libhunspell`. The URL may need to change.
-FROM alpine:3.17.3
+FROM alpine:3.18.4
 
 RUN <<EOF
     set -x
