@@ -1,6 +1,6 @@
 ARG LANGUAGETOOL_VERSION=6.2
 
-FROM debian:bullseye as build
+FROM debian:bookworm as build
 
 ENV DEBIAN_FRONTEND=noninteractive
 
