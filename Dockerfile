@@ -21,12 +21,13 @@ RUN <<EOF
         echo "Installing additional packages for ARM"
         apt-get update -y
         apt-get install -y \
-        build-essential    \
-        cmake              \
-        mercurial          \
-        texlive            \
-        wget               \
-        zip
+            build-essential    \
+            cmake              \
+            git                \
+            mercurial          \
+            texlive            \
+            wget               \
+            zip
     else
         echo "Not installing ARM packages"
     fi
@@ -72,17 +73,17 @@ EOF
 # https://github.com/languagetool-org/languagetool/issues/4543
 WORKDIR /
 
-COPY arm64-workaround/bridj.sh arm64-workaround/bridj.sh
-COPY arm64-workaround/hunspell.sh arm64-workaround/hunspell.sh
+COPY --link --chmod=755 arm64-workaround/bridj.sh arm64-workaround/bridj.sh
+COPY --link --chmod=755 arm64-workaround/hunspell.sh arm64-workaround/hunspell.sh
 
 RUN <<EOF
     set -x
     if [ "$TARGETARCH" = "arm64" ]
     then
         echo "Implementing ARM workarounds"
-        chmod +x arm64-workaround/bridj.sh
+        # chmod +x arm64-workaround/bridj.sh
         bash -c "arm64-workaround/bridj.sh"
-        chmod +x arm64-workaround/hunspell.sh
+        # chmod +x arm64-workaround/hunspell.sh
         bash -c "arm64-workaround/hunspell.sh"
     else
         echo "Not implementing ARM workarounds"
